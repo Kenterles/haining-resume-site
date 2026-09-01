@@ -12,8 +12,6 @@
   function storageGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function storageSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* 隐私模式下静默 */ } }
 
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   /* ================================================================
    * 1. 深浅主题切换（持久化 + 跟随系统偏好）
    * ================================================================ */
@@ -91,7 +89,7 @@
     });
   });
 
-  if ("IntersectionObserver" in window && !reduced) {
+  if ("IntersectionObserver" in window) {
     var revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
@@ -256,6 +254,14 @@
         "认真生活的证明/微信图片_20260901140824_129_11.jpg",
         "认真生活的证明/e6ba13832bd7819779766bc7f8c71047.mp4"
       ]
+    },
+    campus: {
+      title: "校园日常",
+      files: ["校园日常/微信图片_20260901172512_143_11.jpg"]
+    },
+    stars: {
+      title: "抬头遇见的星星",
+      files: ["抬头遇见的星星/微信图片_20260901172515_144_11.jpg"]
     }
   };
 
@@ -270,7 +276,7 @@
   }
 
   (function tagCloud3D() {
-    if (!cloud || reduced) return;
+    if (!cloud) return;
     var ctx = cloud.getContext("2d");
     var CW = 0, CH = 300, DPR = 1;
 
@@ -393,8 +399,8 @@
   /* ================================================================
    * 7. 复制工具（含旧浏览器降级）
    * ================================================================ */
-  function copyText(text, tip) {
-    function ok() { toast("已复制：" + (tip || text)); }
+  function copyText(text, label) {
+    function ok() { toast(label || "已复制：" + text); }
     function fail() {
       var ta = document.createElement("textarea");
       ta.value = text;
@@ -413,7 +419,8 @@
     var cp = e.target.closest("[data-copy]");
     if (cp) {
       e.preventDefault();
-      copyText(cp.getAttribute("data-copy"), "「" + cp.getAttribute("data-copy").slice(0, 22) + "…」(占位内容，可替换)");
+      var copyVal = cp.getAttribute("data-copy");
+      copyText(copyVal, "已复制邮箱：" + copyVal);
       return;
     }
     var cc = e.target.closest(".contact-copy");
@@ -552,7 +559,8 @@
   }
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
-      if (greetDialog && greetDialog.open) greetDialog.close();
+      if (greetDialog && !greetDialog.hidden) greetDialog.hidden = true;
+      if (bgmDialog && !bgmDialog.hidden) bgmDialog.hidden = true;
       closeLightbox();
     }
     /* 相册模式下支持 ← → 键盘翻页 */
@@ -607,14 +615,23 @@
       greetTitle.textContent = "✦ 关于「" + name + "」的打招呼";
       greetBody.textContent = msg;
       greetBody.setAttribute("data-msg", msg);
-      if (greetDialog.showModal) greetDialog.showModal();
+      greetDialog.hidden = false;
     });
   });
   var greetClose = $("#greetClose");
-  if (greetClose) greetClose.addEventListener("click", function () { greetDialog.close(); });
+  if (greetClose) greetClose.addEventListener("click", function () { greetDialog.hidden = true; });
   var greetCopy = $("#greetCopy");
   if (greetCopy) greetCopy.addEventListener("click", function () {
     copyText(greetBody.getAttribute("data-msg"));
+  });
+
+  /* 弹窗背景点击关闭（含「关闭」按钮的 data-close） */
+  document.addEventListener("click", function (e) {
+    var dc = e.target.closest("[data-close]");
+    if (dc) {
+      var modal = dc.closest(".ui-modal");
+      if (modal) modal.hidden = true;
+    }
   });
 
   /* ================================================================
@@ -662,7 +679,7 @@
     }
   }
   if (backTop) backTop.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   /* ================================================================
@@ -684,7 +701,6 @@
    * ================================================================ */
   var heroTitle = $("#heroTitle");
   if (heroTitle) heroTitle.addEventListener("dblclick", function () {
-    if (reduced) return;
     var n = 22;
     for (var i = 0; i < n; i++) {
       var m = document.createElement("span");
@@ -760,7 +776,7 @@
         setTimeout(function () { top.classList.remove("is-in"); }, 700);
       }
       function resumeTimer() {
-        if (timer || reduced) return;
+        if (timer || imgs.length <= 1) return;  // 单张相册不做轮播
         timer = setInterval(function () { play(cur + 1); }, 3400);
       }
       function startShow() {
@@ -816,115 +832,62 @@
   });
 
   /* ================================================================
-   * 17. 背景音乐（意境氛围音）
-   *     - 优先尝试加载 assets/audio/bgm.mp3（免版权素材，可自行放入替换）
-   *     - 不存在时自动使用 WebAudio 程序化生成的共星空氛围音（零文件、零版权风险）
+   * 17. 背景音乐（两首随机选一首，进入网站默认开启）
+   *     - 受浏览器自动播放策略限制，实际在用户点击「无需关闭」后才开始播放
+   *     - 提示框用于提醒可能处于不宜出声的场合
    * ================================================================ */
+  var BGM_FILES = ["背景音乐/Audio-17-34-39.mp3", "背景音乐/Audio-17-34-44.mp3"];
   var bgmBtn = $("#bgmToggle");
-  var bgmOn = false;
-  var bgmReady = false;
-  var bgmMode = ""; // 'file' | 'synth'
-  var audioEl = null;
-  var actx = null, masterGain = null, synthNodes = [];
-  var BGM_VOL = 0.16;
+  var bgmDialog = $("#bgmDialog");
+  var bgmOn = true;              /* 进入网站音乐默认处于开启状态 */
+  var bgmAudio = new Audio();    /* 单例，随机选曲后设置 src */
+  bgmAudio.loop = true;
+  bgmAudio.volume = 0.32;
 
-  function initSynth() {
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    actx = new AC();
-    masterGain = actx.createGain();
-    masterGain.gain.value = 0;
-    masterGain.connect(actx.destination);
-
-    /* 松驰的悬浮和弦垫（A 小调九和弦构成的星尘底色） */
-    var freqs = [110, 164.81, 220, 261.63, 329.63, 415.3];
-    freqs.forEach(function (f, i) {
-      var osc = actx.createOscillator();
-      osc.type = i % 2 ? "sine" : "triangle";
-      osc.frequency.value = f;
-      var g = actx.createGain();
-      var base = (i === 0 ? 0.05 : 0.032) / (1 + i * 0.18);
-      g.gain.value = base;
-      /* 每声部独立慢呼吸 LFO，让音量像星云一样缓慢起伏 */
-      var lfo = actx.createOscillator();
-      lfo.frequency.value = 0.04 + Math.random() * 0.09;
-      var lg = actx.createGain();
-      lg.gain.value = base * 0.75;
-      lfo.connect(lg); lg.connect(g.gain);
-      osc.connect(g); g.connect(masterGain);
-      osc.start(); lfo.start();
-      synthNodes.push(osc, lfo);
-    });
-
-    /* 星空微风般的柔和噪声层 */
-    var len = actx.sampleRate * 2;
-    var buf = actx.createBuffer(1, len, actx.sampleRate);
-    var data = buf.getChannelData(0);
-    for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
-    var noise = actx.createBufferSource();
-    noise.buffer = buf; noise.loop = true;
-    var lp = actx.createBiquadFilter();
-    lp.type = "lowpass"; lp.frequency.value = 420;
-    var ng = actx.createGain(); ng.gain.value = 0.008;
-    noise.connect(lp); lp.connect(ng); ng.connect(masterGain);
-    noise.start();
-    synthNodes.push(noise);
-
-    bgmMode = "synth";
-    return true;
-  }
-
-  function initBgm() {
-    /* 若用户放入了 assets/audio/bgm.mp3 则优先使用音频文件（支持预加载） */
-    fetch("assets/audio/bgm.mp3", { method: "HEAD" })
-      .then(function (r) {
-        if (r.ok) {
-          audioEl = new Audio("assets/audio/bgm.mp3");
-          audioEl.loop = true;
-          audioEl.volume = BGM_VOL;
-          audioEl.preload = "auto";
-          bgmMode = "file";
-        } else {
-          initSynth();
-        }
-        bgmReady = true;
-      })
-      .catch(function () {
-        initSynth();
-        bgmReady = true;
-      });
-  }
-
-  function bgmPlay() {
-    if (bgmMode === "file" && audioEl) {
-      audioEl.play().catch(function () { /* 忽略自动播放策略拦截 */ });
-    } else if (bgmMode === "synth" && actx) {
-      actx.resume().then(function () {
-        masterGain.gain.cancelScheduledValues(actx.currentTime);
-        masterGain.gain.linearRampToValueAtTime(BGM_VOL, actx.currentTime + 1.6);
-      }, function () { /* 忽略 */ });
+  function bgmSyncUI() {
+    if (bgmBtn) {
+      bgmBtn.classList.toggle("on", bgmOn);
+      bgmBtn.setAttribute("aria-label", bgmOn ? "关闭背景音乐" : "开启背景音乐");
     }
   }
-  function bgmStop() {
-    if (bgmMode === "file" && audioEl) audioEl.pause();
-    else if (bgmMode === "synth" && actx && masterGain) {
-      masterGain.gain.cancelScheduledValues(actx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(0, actx.currentTime + 0.5);
-    }
+  function bgmPlayRandom() {
+    var f = BGM_FILES[Math.floor(Math.random() * BGM_FILES.length)];
+    bgmAudio.src = f;
+    bgmAudio.play().catch(function () { /* 自动播放策略拦截时静默忽略 */ });
   }
+  function bgmStopMusic() { bgmAudio.pause(); }
 
+  /* 导航栏音乐按钮：随时手动开关 */
   if (bgmBtn) bgmBtn.addEventListener("click", function () {
-    if (!bgmReady) initBgm();
     bgmOn = !bgmOn;
-    bgmBtn.classList.toggle("on", bgmOn);
-    bgmBtn.setAttribute("aria-label", bgmOn ? "关闭背景音乐" : "开启背景音乐");
-    if (bgmOn) {
-      bgmPlay();
-      toast("已开启背景音乐 🎵");
-    } else {
-      bgmStop();
-    }
+    bgmSyncUI();
+    if (bgmOn) { bgmPlayRandom(); toast("正在播放背景音乐 🎵"); }
+    else bgmStopMusic();
   });
+
+  /* 提示框按钮：无需关闭 / 关闭 */
+  function closeBgmDialog() { if (bgmDialog) bgmDialog.hidden = true; }
+  var bgmKeep = $("#bgmKeep");
+  var bgmClose = $("#bgmClose");
+  if (bgmKeep) bgmKeep.addEventListener("click", function () {
+    closeBgmDialog();
+    bgmOn = true; bgmSyncUI(); bgmPlayRandom();
+  });
+  if (bgmClose) bgmClose.addEventListener("click", function () {
+    closeBgmDialog();
+    bgmOn = false; bgmSyncUI(); bgmStopMusic();
+  });
+
+  /* 开场动画结束后弹出提示；另有定时兜底，防止 intro 事件未触发 */
+  var bgmShown = false;
+  function showBgmDialog() {
+    if (bgmShown || !bgmDialog) return;
+    bgmShown = true;
+    bgmDialog.hidden = false;
+  }
+  window.addEventListener("intro:done", function () { setTimeout(showBgmDialog, 700); });
+  setTimeout(showBgmDialog, 4500);   /* 兜底：intro 异常未派发事件时也会弹出 */
+  bgmSyncUI();
 
   /* 初始化照片堆与回到顶部进度环 */
   initPhotoStacks();

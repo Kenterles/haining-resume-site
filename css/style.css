@@ -848,22 +848,34 @@ footer { border-top: 1px solid var(--card-bd); }
 }
 #toast.show { opacity: 1; transform: none; }
 
-/* ---------- 19. 兴趣打招呼 <dialog> ---------- */
-#greetDialog {
+/* ---------- 19. 弹窗模态层（普通 div，层级低于流星光标） ---------- */
+.ui-modal {
+  position: fixed; inset: 0; z-index: 9600;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.ui-modal[hidden] { display: none; }
+.ui-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(4, 7, 15, .55);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.ui-modal-panel {
+  position: relative; z-index: 1; width: min(460px, 90vw);
   border: 1px solid var(--card-bd); border-radius: 1.4rem;
   background: var(--card-strong); color: var(--text);
-  padding: 30px 30px 26px; max-width: min(460px, 90vw);
+  padding: 30px 30px 26px;
   box-shadow: var(--shadow-deep);
   -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
 }
-#greetDialog::backdrop { background: rgba(4, 7, 15, .55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-#greetDialog .dl-title { font-weight: 800; font-size: 1.05rem; letter-spacing: .04em; }
-#greetDialog .dl-body {
+.ui-modal .dl-title { font-weight: 800; font-size: 1.05rem; letter-spacing: .04em; }
+.ui-modal .dl-body {
   margin-top: 12px; padding: 14px 16px; border-radius: 14px;
   background: var(--bg-soft); border: 1px dashed var(--card-bd);
   line-height: 1.9; font-size: .93rem; color: var(--text);
 }
-#greetDialog .dl-actions { margin-top: 18px; display: flex; justify-content: flex-end; gap: 10px; }
+#bgmDialog .dl-body { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.ui-modal .dl-actions { margin-top: 18px; display: flex; justify-content: flex-end; gap: 10px; }
 
 /* ---------- 20. 自定义流星鼠标指针（仅 PC） ---------- */
 body.cursor-mode, body.cursor-mode * { cursor: none !important; }
@@ -920,6 +932,8 @@ body.cursor-mode, body.cursor-mode * { cursor: none !important; }
 #introPath { stroke: #bcd8ff; stroke-width: 4.6; stroke-linecap: round; stroke-linejoin: round; opacity: .95; }
 #introHead { fill: #eaf3ff; }
 #introSpark { stroke: #dbeaff; stroke-width: 1.1; stroke-linecap: round; opacity: .95; }
+#introSpark.blink { animation: spark-blink .5s ease-in-out 2; }
+@keyframes spark-blink { 0%, 100% { opacity: .95; } 50% { opacity: .2; } }
 .intro-halo {
   position: absolute; inset: -24%; border-radius: 50%;
   background: radial-gradient(circle, rgba(140, 185, 255, .34), transparent 62%);
@@ -1017,14 +1031,6 @@ body.cursor-mode, body.cursor-mode * { cursor: none !important; }
   .btn-resume span { display: none; }             /* 小屏简历按钮仅图标 */
 }
 
-/* ---------- 24. 无障碍：减少动态 ---------- */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-  .reveal { opacity: 1; transform: none; }
-  .hero-item { opacity: 1; transform: none; }
-}
+/* ---------- 24. 备注：全站动效默认始终启用 ----------
+   深空开场的品牌动效应始终在各类设备上播放，因此不再依据系统「减少动态」
+   (prefers-reduced-motion) 强制关闭动画。如需无障碍降级，可在此恢复适配。 */

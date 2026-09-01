@@ -7,7 +7,7 @@
  *   顶层：少量高亮星点缓慢漂移（随鼠标轻微视差）+ 偶发划过的流星
  * 性能策略：
  *   - DPR 上限 2，帧率监控自动降级（低性能设备自动转为低频/静态渲染）
- *   - 页面不可见时暂停 rAF；移动端 / reduced-motion 自动静态渲染
+ *   - 页面不可见时暂停 rAF；移动端自动降级为静态渲染
  * ========================================================================== */
 (function () {
   "use strict";
@@ -16,9 +16,8 @@
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext("2d");
 
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
-  var staticMode = reduced || coarse; // 静态模式：绘制一次，事件触发时重绘
+  var staticMode = coarse; // 静态模式（移动端）：绘制一次，事件触发时重绘
 
   var W = 0, H = 0, DPR = 1;
   var stars = [];   // 中层闪烁星点
