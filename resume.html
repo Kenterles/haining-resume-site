@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>张海宁 Hayden Zhang · 个人简历（打印版）</title>
+  <meta name="description" content="张海宁 Hayden Zhang 的标准求职简历打印版，A4 排版，极简商务黑白灰风格。">
+  <meta name="robots" content="noindex">
+
+  <!-- 字体：与主站保持一致（离线时回退系统字体，不影响打印） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v3.4.17（本地化运行时，与主站共用） -->
+  <script>
+    (function () {
+      var _w = console.warn;
+      console.warn = function () {
+        var msg = String(arguments[0] || "");
+        if (msg.indexOf("should not be used in production") > -1) return;
+        _w.apply(console, arguments);
+      };
+    })();
+  </script>
+  <script src="js/tailwind-3.4.17.js"></script>
+
+  <style>
+    /* ============ 打印版简历专属样式（极简商务黑白灰） ============ */
+    :root { --ink: #1a1f26; --gray: #5b6470; --line: #d8dde3; }
+    html { scroll-behavior: auto; }
+    body {
+      background: #eef0f4;
+      font-family: "Manrope", "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+      color: var(--ink);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    /* A4 纸张容器 */
+    .sheet {
+      width: 100%; max-width: 794px; margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 8px 40px rgba(30, 40, 60, .14);
+      padding: clamp(28px, 6vw, 56px) clamp(24px, 5.4vw, 60px);
+      box-sizing: border-box;
+    }
+
+    /* 顶部工具条（打印时自动隐藏） */
+    .no-print {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .tool-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 999px; font-size: .88rem;
+      border: 1px solid var(--line); background: #fff; color: var(--ink);
+      cursor: pointer; font-weight: 600;
+    }
+    .tool-btn:hover { border-color: #9aa5b1; }
+    .tool-btn.primary { background: #1a1f26; color: #fff; border-color: #1a1f26; }
+
+    /* 简历版式细节 */
+    .cv-name { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; letter-spacing: .22em; }
+    .cv-en { font-size: .95rem; letter-spacing: .5em; color: var(--gray); font-weight: 500; margin-top: 6px; }
+    .cv-slogan { font-size: .88rem; color: var(--gray); letter-spacing: .18em; margin-top: 10px; }
+    .cv-contact { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: .82rem; color: var(--ink); margin-top: 16px; }
+    .cv-contact span b { font-weight: 600; color: var(--gray); margin-right: 5px; font-weight: 500; }
+
+    .cv-sec { margin-top: 26px; }
+    .cv-sec-title {
+      font-size: .95rem; font-weight: 800; letter-spacing: .3em;
+      padding-bottom: 7px; border-bottom: 1.6px solid var(--ink);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cv-sec-title::before { content: ""; }
+    .cv-item { margin-top: 14px; }
+    .cv-item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+    .cv-item-head b { font-size: .98rem; font-weight: 700; letter-spacing: .04em; }
+    .cv-item-head i { font-style: normal; font-size: .84rem; color: var(--gray); }
+    .cv-item-head .time { margin-left: auto; font-size: .82rem; color: var(--gray); white-space: nowrap; }
+    .cv-desc { margin-top: 6px; font-size: .86rem; line-height: 1.9; color: #3a414a; }
+    .cv-desc li { position: relative; padding-left: 14px; margin-top: 3px; }
+    .cv-desc li::before { content: "—"; position: absolute; left: 0; color: #9aa3ad; }
+    .cv-tag {
+      display: inline-block; font-size: .78rem; color: var(--ink);
+      background: #f1f3f6; border: 1px solid var(--line);
+      padding: 4px 12px; border-radius: 999px; margin: 4px 6px 0 0;
+    }
+    .cv-note { font-size: .78rem; color: #9aa3ad; letter-spacing: .06em; }
+
+    /* 打印规则：只输出纯简历内容 */
+    @page { size: A4; margin: 13mm 12mm; }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .sheet { box-shadow: none !important; max-width: none !important; padding: 0 !important; }
+      .cv-sec { break-inside: avoid; }
+      .cv-item { break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- 工具条（打印时自动隐藏） -->
+  <div class="no-print">
+    <div style="max-width:794px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;box-sizing:border-box;">
+      <a class="tool-btn" href="index.html">← 返回网站</a>
+      <span class="cv-note">标准 A4 · 点击右侧按钮打印 / 另存为 PDF</span>
+      <button class="tool-btn primary" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>
+        打印 / 导出 PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- A4 简历主体（留空框架 + 预置姓名，其余自行填写） -->
+  <main class="sheet">
+
+    <!-- ================= 头部 ================= -->
+    <header>
+      <h1 class="cv-name">张海宁</h1>
+      <p class="cv-en">Hayden Zhang</p>
+      <p class="cv-slogan">做一颗持续发光的小行星</p>
+      <div class="cv-contact">
+        <span><b>电话</b><!-- 待填：手机号 -->____________</span>
+        <span><b>邮箱</b><!-- 待填：邮箱 -->____________</span>
+        <span><b>微信</b><!-- 待填 -->____________</span>
+        <span><b>GitHub</b><!-- 待填 -->https://github.com/你的账号</span>
+        <span><b>个人站点</b><!-- 待填 -->你的域名</span>
+      </div>
+    </header>
+
+    <!-- ================= 求职意向 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">求职意向</h2>
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>目标岗位 · 待填写</b>
+          <i>期望城市 · 待填写</i>
+          <span class="time">可到岗时间 · 待填写</span>
+        </div>
+        <p class="cv-desc">一句话说明你的求职方向与个人优势，例如：希望进入 ____ 行业，从事 ____ 方向的工作，把 ____ 与 ____ 结合起来。</p>
+      </div>
+    </section>
+
+    <!-- ================= 教育背景 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">教育背景</h2>
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>山东师范大学</b>
+          <i>生物科学类 · 本科在读（大一）</i>
+          <span class="time">2026.09 – 至今</span>
+        </div>
+        <ul class="cv-desc">
+          <li>主修课程：待填写（挑 3–5 门与求职方向相关的课程）</li>
+          <li>GPA / 排名：待填写（如有优势可写，如 GPA 3.7/4.0 · 专业前 10%）</li>
+          <li>在校荣誉：待填写（奖学金、荣誉称号等）</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 实习经历 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">实习经历</h2>
+
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>公司 / 组织名称 · 待填写</b>
+          <i>岗位 · 待填写</i>
+          <span class="time">20XX.06 – 20XX.09</span>
+        </div>
+        <ul class="cv-desc">
+          <li>负责内容一：用「动词 + 工作 + 数据结果」结构写，例如：独立完成 ____，效率提升 ____%</li>
+          <li>负责内容二：待填写</li>
+          <li>负责内容三：待填写</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>公司 / 组织名称 · 待填写</b>
+          <i>岗位 · 待填写</i>
+          <span class="time">20XX.12 – 20XX.02</span>
+        </div>
+        <ul class="cv-desc">
+          <li>负责内容一：待填写</li>
+          <li>负责内容二：待填写</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 项目经历 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">项目经历</h2>
+
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>项目名称 · 待填写</b>
+          <i>角色：负责人 / 核心成员 · 待填写</i>
+          <span class="time">20XX.03 – 20XX.06</span>
+        </div>
+        <ul class="cv-desc">
+          <li>项目简介：待填写（一句话说明项目是什么、解决什么问题）</li>
+          <li>我的贡献：待填写（用了什么技术 / 方法，取得什么数据结果）</li>
+          <li>项目成果：待填写（获奖、上线、用户量、转化等）</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>项目名称 · 待填写</b>
+          <i>角色 · 待填写</i>
+          <span class="time">20XX.09 – 20XX.12</span>
+        </div>
+        <ul class="cv-desc">
+          <li>项目简介：待填写</li>
+          <li>我的贡献：待填写</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 校园经历 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">校园经历 / 学生工作</h2>
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>组织 / 社团名称 · 待填写</b>
+          <i>职务 · 待填写</i>
+          <span class="time">20XX.09 – 20XX.06</span>
+        </div>
+        <ul class="cv-desc">
+          <li>工作内容一：待填写（同样尽量带数据，如：组织活动 12 场，覆盖 800+ 人次）</li>
+          <li>工作内容二：待填写</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 技能清单 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">技能清单</h2>
+      <div class="cv-item">
+        <span class="cv-tag">技能 · 待填</span>
+        <span class="cv-tag">技能 · 待填</span>
+        <span class="cv-tag">技能 · 待填</span>
+        <span class="cv-tag">技能 · 待填</span>
+        <span class="cv-tag">技能 · 待填</span>
+        <span class="cv-tag">技能 · 待填</span>
+        <p class="cv-note" style="margin-top:8px">建议按「工具 / 语言 / 证书」分类填写，例如：Office 三件套、Python、CET-6……</p>
+      </div>
+    </section>
+
+    <!-- ================= 荣誉证书 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">荣誉证书</h2>
+      <div class="cv-item">
+        <ul class="cv-desc">
+          <li>AI 训练师证书（已取得，可按需改名为证书全称）</li>
+          <li>BSAFE 证书（已取得，可按需改名为证书全称）</li>
+          <li>荣誉 · 待填写</li>
+          <li>荣誉 · 待填写</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 自我评价 ================= -->
+    <section class="cv-sec">
+      <h2 class="cv-sec-title">自我评价</h2>
+      <div class="cv-item">
+        <p class="cv-desc">用 2–3 句第一人称总结自己：性格特质 + 核心能力 + 职业态度。示例：我是一个 ____ 的人，擅长 ____，相信「____」。期待在一个 ____ 的团队里长期成长。</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部留白提示 -->
+  <p class="cv-note no-print" style="text-align:center;margin:22px 0 60px;">本页与在线网页版内容相互独立 · 打印时自动隐藏所有网页元素</p>
+</body>
+</html>

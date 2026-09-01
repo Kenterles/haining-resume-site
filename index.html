@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ================= SEO 基础标签 ================= -->
+  <title>张海宁 Hayden Zhang｜做一颗持续发光的小行星</title>
+  <meta name="description" content="张海宁（Hayden Zhang）的个人小星球：深空星空主题个人品牌展示站，用于开学破冰、社团班委竞选、评优展示，内附标准求职简历打印版。">
+  <meta name="keywords" content="张海宁,Hayden Zhang,个人主页,个人简历,大学生,校园,星空,作品集">
+  <meta name="author" content="张海宁 Hayden Zhang">
+  <meta name="theme-color" content="#05070f">
+  <!-- Open Graph 占位（上线后可替换为自己的分享图） -->
+  <meta property="og:title" content="张海宁 Hayden Zhang｜做一颗持续发光的小行星">
+  <meta property="og:description" content="欢迎来到我的小星球——一颗持续发光的小行星。">
+  <meta property="og:type" content="website">
+
+  <!-- 站点图标：Z-shaped Meteor Logo / 张海宁专属流星符号（Z 字三折拖尾 + 星点） -->
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><g fill="none" stroke="%233a5b8c" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 15 L30 15 L17 37 L35 37"/></g><circle cx="38" cy="37" r="3" fill="%233a5b8c"/></svg>'>
+
+  <!-- 字体：Manrope（拉丁）+ Noto Sans SC（中文正文）+ Ma Shan Zheng（手写标注）；离线时自动回退系统字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v3.4.17（本地化离线运行时，按需编译，无外部请求） -->
+  <script>
+    /* 拦截 Tailwind 运行时自身的“生产环境”提示，保持控制台零警告 */
+    (function () {
+      var _w = console.warn;
+      console.warn = function () {
+        var msg = String(arguments[0] || "");
+        if (msg.indexOf("should not be used in production") > -1) return;
+        _w.apply(console, arguments);
+      };
+    })();
+  </script>
+  <script src="js/tailwind-3.4.17.js"></script>
+  <script>
+    /* ======= 主题令牌：深空蓝主色阶 + 字体 ======= */
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            space: { 50: "#f4f7fc", 100: "#e8eef8", 200: "#d3e0f0", 300: "#acc4e2", 400: "#7d9fc9", 500: "#5b7fae", 600: "#43658f", 700: "#354f74", 800: "#273c59", 900: "#1a2a44", 950: "#0c1526" },
+            glow: { 200: "#dbe9ff", 300: "#bcd8ff", 400: "#94c0ff", 500: "#6aa5fb" }
+          },
+          fontFamily: {
+            sans: ["Manrope", "Noto Sans SC", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+            hand: ["Ma Shan Zheng", "Kaiti SC", "STKaiti", "KaiTi", "cursive"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+
+<body class="antialiased">
+
+  <!-- 无障碍：跳至主要内容 -->
+  <a class="skip-link" href="#main">跳至主要内容</a>
+
+  <!-- ============================================================
+       Z-shaped Meteor Logo / 张海宁专属流星符号（SVG 符号库）
+       整体为一道从左上划向右下的流星轨迹，拖尾三折走势暗合字母 Z：
+       - 上层一笔（细、淡）+ 长斜线（主拖尾）+ 下层一笔（汇聚到流星头部）
+       - 头部为细小发光星点，可单色使用、可带微光
+       ============================================================ -->
+  <svg class="hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- 拖尾渐变：由虚到实、由淡到亮，指向流星头部 -->
+      <linearGradient id="zmGrad" x1="13" y1="15" x2="38" y2="37" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="currentColor" stop-opacity=".15"/>
+        <stop offset=".55" stop-color="currentColor" stop-opacity=".62"/>
+        <stop offset=".95" stop-color="currentColor" stop-opacity=".95"/>
+      </linearGradient>
+      <!-- 符号微光滤镜 -->
+      <filter id="zmGlow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="1.8" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <!-- 完整版（带星点光芒，用于大尺寸场景） -->
+      <symbol id="zm-full" viewBox="0 0 64 64">
+        <polyline points="13,15 30,15 17,37 35,37" fill="none" stroke="url(#zmGrad)" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="38" cy="37" r="2.4" fill="currentColor" filter="url(#zmGlow)"/>
+        <path d="M38 29 v16 M30 37 h16" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".85"/>
+      </symbol>
+      <!-- 精简版（导航栏 / 角落小尺寸专用，缩小后依旧清晰） -->
+      <symbol id="zm-mini" viewBox="0 0 64 64">
+        <polyline points="13,15 30,15 17,37 35,37" fill="none" stroke="url(#zmGrad)" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="38" cy="37" r="2.9" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= 多层星空背景 ================= -->
+  <div id="sky" aria-hidden="true">
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
+  </div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <!-- ================= 流星鼠标指针（仅 PC 鼠标设备生效，JS 控制） ================= -->
+  <canvas id="cursorTrail" aria-hidden="true"></canvas>
+  <div id="cursorStar" aria-hidden="true">
+    <!-- 纯代码绘制的镂空纤细五角星（流星头部），非 emoji、非贴图 -->
+    <svg viewBox="0 0 24 24">
+      <polygon points="12,1.6 14.4,9.0 22.2,9.3 15.9,14.1 18.2,21.7 12,17.4 5.8,21.7 8.1,14.1 1.8,9.3 9.6,9.0" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round" opacity=".95"/>
+      <circle cx="12" cy="11.6" r="1.4" fill="currentColor" opacity=".9"/>
+    </svg>
+  </div>
+
+  <!-- ================= 开场动画（默认隐藏，JS 播放；如 JS 被禁用则直接显示首屏） ================= -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-veil"></div>
+    <div class="intro-dust"></div>
+    <div class="intro-stage" id="introStage">
+      <div class="intro-halo" id="introHalo"></div>
+      <svg viewBox="0 0 64 64">
+        <polyline id="introPath" points="13,15 30,15 17,37 35,37" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle id="introHead" cx="38" cy="37" r="2.6" fill="#eaf3ff"/>
+        <path id="introSpark" d="M38 29 v16 M30 37 h16" stroke="#dbeaff" stroke-width="1.1" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ================= 顶部导航 ================= -->
+  <header id="topbar">
+    <div class="nav-shell">
+      <!-- 左：Z 流星符号 + 中英文姓名 -->
+      <a href="#home" class="nav-brand" aria-label="返回首页">
+        <span class="nav-logo" id="navLogo">
+          <svg width="25" height="25" aria-hidden="true"><use href="#zm-mini"/></svg>
+        </span>
+        <span>张海宁<span class="nav-name-en"> / Hayden Zhang</span></span>
+      </a>
+
+      <!-- 中：主导航 -->
+      <ul class="nav-links" role="navigation" aria-label="主导航">
+        <li><a class="nav-link" data-nav="home" href="#home">首页</a></li>
+        <li><a class="nav-link" data-nav="about" href="#about">关于我</a></li>
+        <li><a class="nav-link" data-nav="journey" href="#journey">成长轨迹</a></li>
+        <li><a class="nav-link" data-nav="works" href="#works">作品展示</a></li>
+        <li><a class="nav-link" data-nav="honors" href="#honors">荣誉证书</a></li>
+        <li><a class="nav-link" data-nav="moments" href="#moments">日常碎片</a></li>
+        <li><a class="nav-link" data-nav="contact" href="#contact">联系我</a></li>
+      </ul>
+
+      <!-- 右：功能按钮区 -->
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="切换深浅主题" title="切换主题">
+          <svg class="dark:hidden" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2 12h2.4M19.6 12H22M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+          <svg class="hidden dark:block" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        </button>
+        <button class="icon-btn" id="bgmToggle" aria-label="背景音乐开关" title="背景音乐">
+          <!-- 播放中（默认隐藏，开启后显示） -->
+          <svg id="bgmIconOn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <!-- 静音（默认显示） -->
+          <svg id="bgmIconOff" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+        </button>
+        <a class="btn-resume" href="resume.html" target="_blank" rel="noopener" title="打开打印版求职简历">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span>下载简历</span>
+        </a>
+        <button class="icon-btn" id="menuBtn" aria-label="打开菜单" title="菜单">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- 移动端抽屉菜单 -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="移动端菜单">
+      <a data-nav="home" href="#home">首页</a>
+      <a data-nav="about" href="#about">关于我</a>
+      <a data-nav="journey" href="#journey">成长轨迹</a>
+      <a data-nav="works" href="#works">作品展示</a>
+      <a data-nav="honors" href="#honors">荣誉证书</a>
+      <a data-nav="moments" href="#moments">日常碎片</a>
+      <a data-nav="contact" href="#contact">联系我</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         01 · 全屏 Hero 首屏
+         ============================================================ -->
+    <section id="home" class="hero">
+      <div class="container-x">
+        <!-- 时间自适应问候语 -->
+        <p class="hero-greeting hero-item" style="--d:.05s">
+          <span class="emo" id="greetEmo">✦</span><span id="greetText">你好</span> · 欢迎来到我的小星球
+        </p>
+        <!-- 主姓名：张海宁（主视觉，不可弱化） -->
+        <h1 class="hero-name hero-item" style="--d:.22s" id="heroTitle">张海宁</h1>
+        <!-- 辅助英文名：略小、略淡，仅作补充 -->
+        <p class="hero-sub hero-item" style="--d:.38s">Hayden Zhang</p>
+        <p class="hero-slogan hero-item" style="--d:.52s">做一颗持续发光的小行星</p>
+
+        <!-- 三维标签云（PC/平板为 Canvas 3D 球，移动端为静态标签） -->
+        <div class="hero-tags hero-item" style="--d:.72s">
+          <canvas id="tagCloud" width="680" height="300" aria-label="三维身份标签云"></canvas>
+          <div class="chip-cloud" id="chipCloud" aria-label="身份标签"></div>
+        </div>
+      </div>
+
+      <!-- 向下滑动指引 -->
+      <a class="hero-scroll-hint hero-item" style="--d:.95s" href="#about" aria-label="向下滑动">
+        <span>向 下 滑 动</span>
+        <span class="mouse-shape"><span class="mouse-dot"></span></span>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         02 · 关于我
+         ============================================================ -->
+    <section id="about" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">About Me</p>
+        <h2 class="sec-title reveal" style="--d:.08s">关于我 · 一颗小行星的自述</h2>
+        <p class="sec-sub reveal" style="--d:.16s">以下为第一人称示例文案框架，可整体替换成你自己的故事。</p>
+
+        <div class="about-grid mt-12 stagger">
+          <!-- 左：第一人称自我介绍（示例文案，可替换） -->
+          <div class="reveal">
+            <div class="about-text">
+              <p>
+                你好呀，我是 <strong>张海宁</strong>。如果把大学生活比作一片星空，我希望自己是其中一颗
+                <strong>持续发光的小行星</strong>——不一定是最亮的那颗，但一定在自己的轨道上认真运行、真诚发光。
+              </p>
+              <p>
+                <!-- 示例段落：可以写你的性格、兴趣、校园角色，保持第一人称口语感 -->
+                我喜欢把普通的日子过出一点仪式感：课堂上争取把每个观点讲清楚，社团里把手头的小事做到闭环，
+                空闲时看一部话剧、打一局游戏，或者只是抬头看看星星。对我来说，靠谱和有趣并不冲突。
+              </p>
+              <p>
+                <!-- 示例段落：竞选 / 交友双场景可共用这段自我介绍 -->
+                这里是我的小星球，欢迎你随便逛逛。如果你想认识我，或者愿意和我一起做点什么有意思的事，
+                直接滑到文末「联系我」就好——我不常在线，但每条消息都会认真回复。
+              </p>
+            </div>
+          </div>
+
+          <!-- 右：个人信息卡片（底层叠 Z 流星符号水印） -->
+          <aside class="reveal" style="--d:.15s">
+            <div class="zm-card hoverable about-info-card h-full">
+              <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <svg class="zm-watermark" aria-hidden="true"><use href="#zm-full"/></svg>
+              <h3 class="font-bold text-lg tracking-widest">信息速览</h3>
+              <dl class="mt-2">
+                <div class="info-row"><dt>中文名</dt><dd>张海宁</dd></div>
+                <div class="info-row"><dt>英文名</dt><dd>Hayden Zhang</dd></div>
+                <div class="info-row"><dt>学校</dt><dd>山东师范大学</dd></div>
+                <div class="info-row"><dt>专业 / 年级</dt><dd>生物科学类 / 大一</dd></div>
+                <div class="info-row"><dt>家乡</dt><dd>山东潍坊</dd></div>
+                <div class="info-row"><dt>MBTI</dt><dd>ESFP-AH</dd></div>
+                <div class="info-row"><dt>身份标签</dt><dd style="line-height:1.7;font-size:.86rem">羽毛球 · 前端开发 · AI 实践 · 魔方</dd></div>
+                <div class="info-row"><dt>Slogan</dt><dd>做一颗持续发光的小行星</dd></div>
+              </dl>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         03 · 成长轨迹（星空成长星图时间线 + 竞选主张）
+         ============================================================ -->
+    <section id="journey" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">My Journey</p>
+        <h2 class="sec-title reveal" style="--d:.08s">成长轨迹 · 我的星图</h2>
+        <p class="sec-sub reveal" style="--d:.16s">每一站都是一颗发光的小星星，被一条流星轨迹串起来。<!-- 示例卡片可复制修改，数量不限 --></p>
+
+        <div class="timeline">
+          <div class="tl-line" aria-hidden="true"></div>
+
+          <!-- 节点一（示例：可替换为你的真实经历） -->
+          <article class="tl-item">
+            <span class="tl-dot" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5L14 9.8 22.5 12 14 14.2 12 22.5 10 14.2 1.5 12 10 9.8Z"/></svg>
+            </span>
+            <div class="zm-card hoverable tl-card reveal">
+              <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <div class="tl-head">
+                <h3 class="tl-org">组织 / 社团名称</h3>
+                <span class="tl-role">岗位 · 待补充</span>
+                <span class="tl-time">20XX.09 – 20XX.06</span>
+              </div>
+              <p class="tl-desc">
+                <!-- 示例描述（第一人称 + 数据化成果）：-->
+                在大一加入了这个组织，从一个只会说“好的收到”的新人，慢慢学会把一件小事负责到底。
+                这里写下你印象最深的一段经历与成长。
+              </p>
+              <div class="tl-data">
+                <span>数据成果 · 待填</span>
+                <span>数据成果 · 待填</span>
+                <span>数据成果 · 待填</span>
+              </div>
+              <div class="tl-story">
+                <button class="tl-story-btn" aria-expanded="false">
+                  ✨ 幕后故事 <span class="caret">▾</span>
+                </button>
+                <div class="tl-story-body">
+                  <div>
+                    <p class="tl-story-text">这里会讲一个只有我知道的小故事——比如第一次搞砸、又第一次扳回来。等你想好了就写在这里 ✨</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 节点二 -->
+          <article class="tl-item">
+            <span class="tl-dot" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5L14 9.8 22.5 12 14 14.2 12 22.5 10 14.2 1.5 12 10 9.8Z"/></svg>
+            </span>
+            <div class="zm-card hoverable tl-card reveal" style="--d:.05s">
+              <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <div class="tl-head">
+                <h3 class="tl-org">项目 / 比赛名称</h3>
+                <span class="tl-role">角色 · 待补充</span>
+                <span class="tl-time">20XX.03 – 20XX.08</span>
+              </div>
+              <p class="tl-desc">
+                <!-- 示例描述：-->
+                第一次真正带一支小队做事，从排期、分工到交付，明白了“靠谱”是可以用行动验证的。
+              </p>
+              <div class="tl-data">
+                <span>数据成果 · 待填</span>
+                <span>数据成果 · 待填</span>
+              </div>
+              <div class="tl-story">
+                <button class="tl-story-btn" aria-expanded="false">
+                  ✨ 幕后故事 <span class="caret">▾</span>
+                </button>
+                <div class="tl-story-body">
+                  <div>
+                    <p class="tl-story-text">留一个位置，放一段“大家不知道的事”。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 节点三 -->
+          <article class="tl-item">
+            <span class="tl-dot" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5L14 9.8 22.5 12 14 14.2 12 22.5 10 14.2 1.5 12 10 9.8Z"/></svg>
+            </span>
+            <div class="zm-card hoverable tl-card reveal" style="--d:.05s">
+              <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <div class="tl-head">
+                <h3 class="tl-org">正在发生：XX</h3>
+                <span class="tl-role">进行中 · 待补充</span>
+                <span class="tl-time">20XX.09 – 至今</span>
+              </div>
+              <p class="tl-desc">
+                <!-- 示例描述：-->
+                现在的我在为下一件想做的事积蓄能量，把每一天过成值得记录的一小段轨道。
+              </p>
+              <div class="tl-data">
+                <span>数据成果 · 待填</span>
+              </div>
+              <div class="tl-story">
+                <button class="tl-story-btn" aria-expanded="false">
+                  ✨ 幕后故事 <span class="caret">▾</span>
+                </button>
+                <div class="tl-story-body">
+                  <div>
+                    <p class="tl-story-text">故事还没发生，也许就会发生在认识你之后 ✨</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 竞选主张子模块：独立卡片区块，标题保持「竞选主张 · 如果我成为那颗星」 -->
+        <div class="zm-card manifesto reveal">
+          <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+          <p class="sec-kicker">My Manifesto</p>
+          <h3 class="sec-title" style="font-size:clamp(1.3rem,2.6vw,1.8rem)">竞选主张 · 如果我成为那颗星</h3>
+          <div class="manifesto-grid stagger">
+
+            <!-- 主张 01：四角星线条图标 -->
+            <article class="mfs-item reveal">
+              <svg class="mfs-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.5 L13.9 10.1 L21.5 12 L13.9 13.9 L12 21.5 L10.1 13.9 L2.5 12 L10.1 10.1 Z"/>
+              </svg>
+              <div class="mfs-text">
+                <h4 class="mfs-title">踏实落地</h4>
+                <p class="mfs-body">认真跟进每一项事务，活动细节、对接工作件件落实，不拖延、不敷衍，事事有回音。</p>
+              </div>
+              <svg class="mfs-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.5 L13.9 10.1 L21.5 12 L13.9 13.9 L12 21.5 L10.1 13.9 L2.5 12 L10.1 10.1 Z"/>
+              </svg>
+            </article>
+
+            <!-- 主张 02：流星轨迹线条图标（呼应单痕流星 Z 字符号） -->
+            <article class="mfs-item reveal">
+              <svg class="mfs-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.8 17.6 L15.8 6.6"/>
+                <circle cx="18.7" cy="3.7" r="1.7"/>
+              </svg>
+              <div class="mfs-text">
+                <h4 class="mfs-title">技术提效</h4>
+                <p class="mfs-body">分享 AI 工具与办公实用技巧，用技术简化统计、文案类重复工作，帮大家提升效率省时间。</p>
+              </div>
+              <svg class="mfs-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.8 17.6 L15.8 6.6"/>
+                <circle cx="18.7" cy="3.7" r="1.7"/>
+              </svg>
+            </article>
+
+            <!-- 主张 03：星芒线条图标 -->
+            <article class="mfs-item reveal">
+              <svg class="mfs-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="3.1"/>
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+              </svg>
+              <div class="mfs-text">
+                <h4 class="mfs-title">同好联结</h4>
+                <p class="mfs-body">定期组织技术交流、羽毛球约球、魔方切磋等小活动，搭起同好交流的小平台。</p>
+              </div>
+              <svg class="mfs-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="3.1"/>
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+              </svg>
+            </article>
+
+            <!-- 主张 04：星环线条图标 -->
+            <article class="mfs-item reveal">
+              <svg class="mfs-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="8.2"/>
+                <circle cx="12" cy="12" r="1.6"/>
+                <circle cx="19.6" cy="7.6" r="1.3" fill="currentColor" stroke="none"/>
+              </svg>
+              <div class="mfs-text">
+                <h4 class="mfs-title">轻松共担</h4>
+                <p class="mfs-body">遇事一起商量、一起分担，不搞形式主义，营造轻松靠谱、有话直说的团队氛围。</p>
+              </div>
+              <svg class="mfs-watermark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="8.2"/>
+                <circle cx="12" cy="12" r="1.6"/>
+                <circle cx="19.6" cy="7.6" r="1.3" fill="currentColor" stroke="none"/>
+              </svg>
+            </article>
+          </div>
+          <p class="manifesto-quote">「 我不一定是最闪亮的那颗星，但我想让身边的人都发一点光。」</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         04 · 作品与项目展示
+         ============================================================ -->
+    <section id="works" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">My Works</p>
+        <h2 class="sec-title reveal" style="--d:.08s">作品展示 · 轨道上的小小成果</h2>
+        <p class="sec-sub reveal" style="--d:.16s">图片位已预留，替换 assets/img 中的占位图即可；点击卡片可放大预览。</p>
+
+        <!-- 分类 Tab -->
+        <div class="work-tabs reveal" style="--d:.22s" role="tablist" aria-label="作品分类">
+          <button class="work-tab active" data-cat="all" role="tab">全部</button>
+          <button class="work-tab" data-cat="ai" role="tab">AI 与科技</button>
+          <button class="work-tab" data-cat="design" role="tab">创意设计</button>
+          <button class="work-tab" data-cat="campus" role="tab">校园活动</button>
+        </div>
+
+        <div class="work-grid stagger" id="workGrid">
+          <!-- 作品卡片模板（可复制本块新增作品） -->
+          <article class="zm-card hoverable work-card reveal" data-cat="ai">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <!-- 正式图片：把 <img class="lazy" src="assets/img/xxx.jpg" alt="..."> 放进 .img-slot 即自动懒加载淡入 -->
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">AI 与科技</span>
+              <h3 class="work-title">作品名称 · 待命名 01</h3>
+              <p class="work-desc">一句话介绍这个作品：它解决了什么问题，或者表达了什么？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span><span>亮点 · 待填</span><span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+
+          <article class="zm-card hoverable work-card reveal" data-cat="design">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">创意设计</span>
+              <h3 class="work-title">作品名称 · 待命名 02</h3>
+              <p class="work-desc">一句话介绍这个作品：它的灵感从哪里来？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span><span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+
+          <article class="zm-card hoverable work-card reveal" data-cat="campus">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">校园活动</span>
+              <h3 class="work-title">作品名称 · 待命名 03</h3>
+              <p class="work-desc">一句话介绍这场活动：你负责了哪一部分？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span><span>亮点 · 待填</span><span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+
+          <article class="zm-card hoverable work-card reveal" data-cat="ai">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">AI 与科技</span>
+              <h3 class="work-title">作品名称 · 待命名 04</h3>
+              <p class="work-desc">一句话介绍这个作品：用了什么技术，效果如何？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span><span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+
+          <article class="zm-card hoverable work-card reveal" data-cat="design">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">创意设计</span>
+              <h3 class="work-title">作品名称 · 待命名 05</h3>
+              <p class="work-desc">一句话介绍这个作品：为谁而做，达到了什么效果？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+
+          <article class="zm-card hoverable work-card reveal" data-cat="campus">
+            <div class="img-slot" style="aspect-ratio:16/10">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">作品图 · 待补充</span>
+            </div>
+            <div class="work-body">
+              <span class="work-tag">校园活动</span>
+              <h3 class="work-title">作品名称 · 待命名 06</h3>
+              <p class="work-desc">一句话介绍这场活动：它给参与者带来了什么？</p>
+              <div class="work-pts">
+                <span>亮点 · 待填</span><span>亮点 · 待填</span>
+              </div>
+              <span class="work-zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+                点击查看大图
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         05 · 荣誉证书（按重要性排序，图片 hover 放大 + 点击预览）
+         ============================================================ -->
+    <section id="honors" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">My Honors</p>
+        <h2 class="sec-title reveal" style="--d:.08s">荣誉证书 · 星星收集册</h2>
+        <p class="sec-sub reveal" style="--d:.16s">按重要性排序。把新证书图片放进根目录（或 assets/img/），照现有卡片格式添加即可。</p>
+
+        <div class="honor-grid stagger">
+          <!-- 证书 01 -->
+          <figure class="zm-card hoverable honor-card reveal">
+            <div class="honor-media" data-lb data-cap="AI 训练师证书">
+              <span class="honor-rank">TOP 01</span>
+              <img class="lazy" src="AI训练师证书.jpg" alt="AI 训练师证书" loading="lazy">
+            </div>
+            <figcaption class="honor-cap">
+              <b>AI 训练师证书</b>
+              <i>名称可按证书内容修改</i>
+            </figcaption>
+          </figure>
+
+          <!-- 证书 02 -->
+          <figure class="zm-card hoverable honor-card reveal">
+            <div class="honor-media" data-lb data-cap="BSAFE 证书">
+              <span class="honor-rank">TOP 02</span>
+              <img class="lazy" src="BSAFE证书.png" alt="BSAFE 证书" loading="lazy">
+            </div>
+            <figcaption class="honor-cap">
+              <b>BSAFE 证书</b>
+              <i>名称可按证书内容修改</i>
+            </figcaption>
+          </figure>
+
+          <!-- 荣誉占位（可复制本块继续添加） -->
+          <figure class="zm-card honor-card reveal">
+            <div class="honor-empty">
+              <svg width="26" height="26" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <span>荣誉待补充 · 03</span>
+              <span class="text-xs">把证书图片放进来即可</span>
+            </div>
+          </figure>
+          <figure class="zm-card honor-card reveal">
+            <div class="honor-empty">
+              <svg width="26" height="26" aria-hidden="true"><use href="#zm-mini"/></svg>
+              <span>荣誉待补充 · 04</span>
+              <span class="text-xs">把证书图片放进来即可</span>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         06 · 日常碎片（错落照片墙 + 手写风标注）
+         ============================================================ -->
+    <section id="moments" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">Daily Moments</p>
+        <h2 class="sec-title reveal" style="--d:.08s">日常碎片 · 轨道上的光</h2>
+        <p class="sec-sub reveal" style="--d:.16s">校园、爱好、旅行、社团团建……照片位已留好，替换占位图后在标注处随手写一句话。</p>
+
+        <div class="masonry stagger">
+          <!-- 照片占位（可复制；改 style 里的 aspect-ratio 可变化错落高度） -->
+          <figure class="mom-item reveal">
+            <div class="img-slot" style="aspect-ratio:3/4">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">照片 · 待补充</span>
+            </div>
+            <figcaption class="mom-cap">校园日常 · 想说的话写在这里 ✦</figcaption>
+          </figure>
+          <figure class="mom-item reveal">
+            <div class="photo-stack" data-album="friends" style="aspect-ratio:1/1" role="button" tabindex="0" aria-label="打开相册：和朋友们（9 张）"></div>
+            <figcaption class="mom-cap">和朋友们 ✦</figcaption>
+          </figure>
+          <figure class="mom-item reveal">
+            <div class="photo-stack" data-album="club" style="aspect-ratio:4/5" role="button" tabindex="0" aria-label="打开相册：某次社团团建（11 张）"></div>
+            <figcaption class="mom-cap">某次社团团建 ✦</figcaption>
+          </figure>
+          <figure class="mom-item reveal">
+            <div class="img-slot" style="aspect-ratio:1/1">
+              <svg class="slot-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+              <span class="slot-note">照片 · 待补充</span>
+            </div>
+            <figcaption class="mom-cap">抬头遇见的星星 ✦</figcaption>
+          </figure>
+          <figure class="mom-item reveal">
+            <div class="photo-stack" data-album="travel" style="aspect-ratio:4/3" role="button" tabindex="0" aria-label="打开相册：旅行途中的一站（59 张）"></div>
+            <figcaption class="mom-cap">旅行途中的一站 ✦</figcaption>
+          </figure>
+          <figure class="mom-item reveal">
+            <div class="photo-stack" data-album="life" style="aspect-ratio:1/1" role="button" tabindex="0" aria-label="打开相册：认真生活的证明（11 张 + 1 段视频）"></div>
+            <figcaption class="mom-cap">认真生活的证明 ✦</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         07 · 兴趣与同好（标签云 → 点击弹出打招呼文案）
+         ============================================================ -->
+    <section id="interests" class="section">
+      <div class="container-x">
+        <p class="sec-kicker reveal">Find Me Here</p>
+        <h2 class="sec-title reveal" style="--d:.08s">兴趣与同好 · 我们的交集</h2>
+        <p class="sec-sub reveal" style="--d:.16s">点一下你感兴趣的标签，会弹出一条可以直接复制发给我的打招呼 🍀（分类与标签均为示例，可自由替换）。</p>
+
+        <div class="int-grid stagger">
+          <!-- 分类 01 -->
+          <div class="zm-card hoverable int-group reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <h3 class="int-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3c.9 4.6 3.4 7.1 8 8-4.6.9-7.1 3.4-8 8-.9-4.6-3.4-7.1-8-8 4.6-.9 7.1-3.4 8-8Z"/></svg>
+              星空与旅行
+            </h3>
+            <div class="int-chips">
+              <button class="int-chip" data-greet="观星">观星</button>
+              <button class="int-chip" data-greet="星空摄影">星空摄影</button>
+              <button class="int-chip" data-greet="Citywalk">Citywalk</button>
+              <button class="int-chip" data-greet="旅行规划">旅行规划</button>
+              <button class="int-chip" data-greet="天文纪录片">天文纪录片</button>
+              <button class="int-chip" data-greet="夜跑看月亮">夜跑看月亮</button>
+            </div>
+          </div>
+
+          <!-- 分类 02 -->
+          <div class="zm-card hoverable int-group reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <h3 class="int-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="11" rx="4"/><path d="M8 10.5v3M11 9.5v2M14 10.5v3M17 9.5v2"/></svg>
+              游戏世界
+            </h3>
+            <div class="int-chips">
+              <button class="int-chip" data-greet="开放世界">开放世界</button>
+              <button class="int-chip" data-greet="像素风独立游戏">像素风独立游戏</button>
+              <button class="int-chip" data-greet="桌游">桌游</button>
+              <button class="int-chip" data-greet="合作联机">合作联机</button>
+              <button class="int-chip" data-greet="轻度竞技">轻度竞技</button>
+              <button class="int-chip" data-greet="游戏杂谈">游戏杂谈</button>
+            </div>
+          </div>
+
+          <!-- 分类 03 -->
+          <div class="zm-card hoverable int-group reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <h3 class="int-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6l1.5 2H20v12H4V4Z" opacity=".75"/><circle cx="12" cy="12.5" r="3.2"/><path d="M15.2 12.5c.9.3 1.6 1 1.6 2 0 1.4-2.1 2-4.8 2s-4.8-.6-4.8-2c0-1 .7-1.7 1.6-2"/></svg>
+              文艺剧场
+            </h3>
+            <div class="int-chips">
+              <button class="int-chip" data-greet="话剧">话剧</button>
+              <button class="int-chip" data-greet="音乐剧">音乐剧</button>
+              <button class="int-chip" data-greet="电影拉片">电影拉片</button>
+              <button class="int-chip" data-greet="剧本杀">剧本杀</button>
+              <button class="int-chip" data-greet="即兴喜剧">即兴喜剧</button>
+              <button class="int-chip" data-greet="看展">看展</button>
+            </div>
+          </div>
+
+          <!-- 分类 04 -->
+          <div class="zm-card hoverable int-group reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <h3 class="int-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></svg>
+              校园日常
+            </h3>
+            <div class="int-chips">
+              <button class="int-chip" data-greet="奶茶测评">奶茶测评</button>
+              <button class="int-chip" data-greet="食堂探索">食堂探索</button>
+              <button class="int-chip" data-greet="图书馆搭子">图书馆搭子</button>
+              <button class="int-chip" data-greet="操场散步">操场散步</button>
+              <button class="int-chip" data-greet="社团活动">社团活动</button>
+              <button class="int-chip" data-greet="摆摊集市">摆摊集市</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         08 · 联系我
+         ============================================================ -->
+    <section id="contact" class="section">
+      <div class="container-x text-center">
+        <p class="sec-kicker reveal" style="justify-content:center">Contact Me</p>
+        <h2 class="sec-title reveal" style="--d:.08s">联系我 · 一起发光</h2>
+        <p class="sec-sub reveal" style="--d:.16s;margin-inline:auto">无论是认识新朋友，还是聊点正经事，都欢迎。</p>
+
+        <!-- 双场景结尾文案 -->
+        <div class="contact-duo stagger">
+          <div class="zm-card hoverable contact-card reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <span class="contact-kind">FRIEND · 交友向</span>
+            <p class="contact-quote">如果你也喜欢星空 / 游戏 / 话剧，随时找我搭子！</p>
+            <button class="btn-ghost btn-sm contact-copy" data-copy-text="如果你也喜欢星空/游戏/话剧，随时找我搭子！">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制这句话
+            </button>
+          </div>
+          <div class="zm-card hoverable contact-card reveal">
+            <svg class="zm-corner" aria-hidden="true"><use href="#zm-mini"/></svg>
+            <span class="contact-kind">CAMPAIGN · 竞选向</span>
+            <p class="contact-quote">如果认可我的想法，希望能得到你的支持 ✨</p>
+            <button class="btn-ghost btn-sm contact-copy" data-copy-text="如果认可我的想法，希望能得到你的支持✨">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              复制这句话
+            </button>
+          </div>
+        </div>
+
+        <!-- 社交图标 -->
+        <div class="social-row stagger">
+          <a class="social-link reveal" href="#contact-qr" aria-label="微信（二维码见下方）" title="微信">
+            <svg viewBox="0 0 24 24"><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="17" font-weight="700" fill="currentColor">微</text></svg>
+          </a>
+          <a class="social-link reveal" href="#contact-qr" aria-label="QQ（二维码见下方）" title="QQ">
+            <svg viewBox="0 0 24 24"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">QQ</text></svg>
+          </a>
+          <a class="social-link reveal" href="mailto:hayden.zhang@example.com" data-copy="hayden.zhang@example.com" aria-label="邮箱（点击复制占位邮箱，替换为真实邮箱）" title="邮箱">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+          </a>
+          <a class="social-link reveal" href="#" data-coming="GitHub 链接待补充" target="_blank" rel="noopener" aria-label="GitHub（链接待补充）" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.5 1.5-4.5-2.2-6-2.7m14 6v-3.6a3.3 3.3 0 0 0-.9-2.5c3-.3 6.2-1.5 6.2-6.7a5.2 5.2 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.6 12.6 0 0 0-6.4 0C8.3 1.1 7.2 1.4 7.2 1.4a4.8 4.8 0 0 0-.1 3.6 5.2 5.2 0 0 0-1.4 3.6c0 5.1 3.1 6.2 6.1 6.6a3.3 3.3 0 0 0-.9 2.5V22"/></svg>
+          </a>
+          <a class="social-link reveal" href="#" data-coming="个人站点链接待补充" target="_blank" rel="noopener" aria-label="个人站点（链接待补充）" title="个人站点">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9Z"/></svg>
+          </a>
+        </div>
+
+        <!-- 微信 / QQ 二维码预留展示位 -->
+        <div class="qr-duo stagger" id="contact-qr">
+          <div class="zm-card qr-box reveal">
+            <b>微信</b>
+            <div class="qr-slot-img"><img class="lazy" src="微信二维码/710142d2566005fbbdddef1c3ab6fba0.jpg" alt="张海宁的微信二维码" loading="lazy"></div>
+            <p class="qr-tip">扫码加我微信</p>
+          </div>
+          <div class="zm-card qr-box reveal">
+            <b>QQ</b>
+            <div class="qr-slot-img"><img class="lazy" src="QQ二维码/1e999048fe8c1c2ac776a55ea1bfc218.jpg" alt="张海宁的 QQ 二维码" loading="lazy"></div>
+            <p class="qr-tip">扫码加我 QQ</p>
+          </div>
+        </div>
+
+        <!-- 「为我点亮一颗星」互动按钮 -->
+        <div class="star-cta reveal">
+          <button class="star-btn" id="starBtn" aria-label="为我点亮一颗星">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5L14 9.8 22.5 12 14 14.2 12 22.5 10 14.2 1.5 12 10 9.8Z"/></svg>
+            为我点亮一颗星
+          </button>
+          <p class="star-count">已有 <b id="starCount">0</b> 颗星被点亮 · 数据保存在你的浏览器里</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 页脚 ================= -->
+  <footer id="footer">
+    <div class="container-x footer-inner">
+      <svg class="footer-logo" aria-hidden="true"><use href="#zm-full"/></svg>
+      <p class="footer-slogan">做一颗持续发光的小行星</p>
+      <p class="footer-name">张海宁 <span>/ Hayden Zhang</span></p>
+
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#home">首页</a>
+        <a href="#about">关于我</a>
+        <a href="#journey">成长轨迹</a>
+        <a href="#works">作品展示</a>
+        <a href="#honors">荣誉证书</a>
+        <a href="resume.html" target="_blank" rel="noopener">打印版简历</a>
+      </nav>
+
+      <div class="divider-line" aria-hidden="true"></div>
+      <p class="footer-meta">
+        © 2026 张海宁 · Hayden Zhang · 保留所有权利<br>
+        本站由爱好驱动、纯手工搭建 · HTML5 + Tailwind CSS + 原生 JavaScript · 零插件依赖 · 可直接部署 Netlify
+      </p>
+      <!-- 滚动到底部显示的彩蛋文案 -->
+      <p id="footerEgg">感谢你看完我的小星球 ✨</p>
+    </div>
+  </footer>
+
+  <!-- ================= 全局功能组件 ================= -->
+  <!-- 回到顶部（环形滚动进度） -->
+  <button id="backTop" aria-label="回到顶部" title="回到顶部">
+    <svg viewBox="0 0 46 46" aria-hidden="true">
+      <circle class="ring-bg" cx="23" cy="23" r="20.4"></circle>
+      <circle class="ring-fg" id="ringFg" cx="23" cy="23" r="20.4"></circle>
+    </svg>
+    <span class="arrow">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </span>
+  </button>
+
+  <!-- 大图预览模态框（作品 / 证书 / 相册共用） -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose" aria-label="关闭预览">✕</button>
+      <!-- 相册模式：左右切换 + 计数器（单图模式下自动隐藏） -->
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张" tabindex="0">‹</button>
+      <button class="lb-nav lb-next" id="lbNext" aria-label="下一张" tabindex="0">›</button>
+      <span class="lb-count" id="lbCount" aria-live="polite"></span>
+      <!-- 相册模式专用的预载容器（display:none 仍会触发浏览器下载） -->
+      <div class="lb-preload" id="lbPreload" aria-hidden="true"></div>
+      <div class="lb-media" id="lbMedia"></div>
+      <p class="lb-cap" id="lbCap"></p>
+    </div>
+  </div>
+
+  <!-- 兴趣标签打招呼弹窗 -->
+  <dialog id="greetDialog" aria-label="打招呼文案">
+    <p class="dl-title" id="greetTitle">✦ 打招呼文案</p>
+    <p class="dl-body" id="greetBody"></p>
+    <div class="dl-actions">
+      <button class="btn-ghost btn-sm" id="greetClose">关闭</button>
+      <button class="btn-primary btn-sm" id="greetCopy">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        一键复制
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Toast 轻提示 -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ================= 脚本（顺序加载，均为原生 JS、零依赖） ================= -->
+  <script src="js/starfield.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
