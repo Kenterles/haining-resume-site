@@ -893,3 +893,59 @@
   initPhotoStacks();
   updateBackTop();
 })();
+
+/* ================================================================
+ * 图片加载失败自愈（追加，不改动原有业务代码）
+ * ------------------------------------------------------------------
+ *  - 破损 / 404 图片加 .img-broken-hide 隐藏，脱离文档流、不留占位
+ *  - 图片全失效的卡片整体隐藏，网格靠 row dense 自动填补空缺
+ *  - 整个板块图片全失效时，隐藏该板块（含标题），后续内容自然上移
+ *  - 用捕获阶段监听 error，可覆盖懒加载与动态插入的图片
+ * ================================================================ */
+(function () {
+  "use strict";
+
+  var CARD_SEL = ".work-card, .honor-card, .mom-item, .qr-box";
+
+  function hide(el) { if (el) el.classList.add("img-broken-hide"); }
+
+  /* 板块内所有卡片都隐藏后，隐藏整个板块（含标题） */
+  function refreshSection(section) {
+    if (!section) return;
+    var cards = section.querySelectorAll(CARD_SEL);
+    var alive = false;
+    for (var i = 0; i < cards.length; i++) {
+      if (!cards[i].classList.contains("img-broken-hide")) { alive = true; break; }
+    }
+    if (cards.length && !alive) hide(section);
+  }
+
+  /* 单张图失效：隐藏图片 → 卡片内再无有效图则隐藏卡片 → 级联板块 */
+  function onBroken(img) {
+    if (!img || img.classList.contains("img-broken-hide")) return;
+    hide(img);
+    var card = img.closest(CARD_SEL);
+    if (card && !card.querySelector("img:not(.img-broken-hide)")) {
+      hide(card);
+      var section = card.closest("section");
+      if (section) refreshSection(section);
+    }
+  }
+
+  /* 捕获阶段监听：img 的 error 不冒泡但可捕获，并覆盖后续动态插入的图片 */
+  document.addEventListener("error", function (e) {
+    var t = e.target;
+    if (t && t.tagName === "IMG") onBroken(t);
+  }, true);
+
+  /* 兜底：扫描已被缓存判定为失败的既有图片（complete 但 naturalWidth 为 0） */
+  function scan() {
+    var imgs = document.querySelectorAll("img");
+    for (var i = 0; i < imgs.length; i++) {
+      var im = imgs[i];
+      if (im.complete && im.naturalWidth === 0 && im.getAttribute("src")) onBroken(im);
+    }
+  }
+  if (document.readyState === "complete") scan();
+  else window.addEventListener("load", scan);
+})();
