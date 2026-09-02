@@ -1043,3 +1043,9 @@ body.cursor-mode, body.cursor-mode * { cursor: none !important; }
    ================================================================ */
 .img-broken-hide { display: none !important; }
 .work-grid, .honor-grid, .qr-duo { grid-auto-flow: row dense; }
+
+/* ================================================================
+   26. 联系我 · 励志名言（正文与出处同排，出处弱化）
+   ================================================================ */
+.contact-quote .quote-text { color: var(--text); }
+.contact-quote .quote-from { font-size: .78em; color: var(--faint); }

@@ -949,3 +949,63 @@
   if (document.readyState === "complete") scan();
   else window.addEventListener("load", scan);
 })();
+
+/* ================================================================
+ * 联系我 · 随机励志名言（每次加载随机、不重复抽 2 条，各放左右卡）
+ * ================================================================ */
+(function () {
+  "use strict";
+
+  var QUOTES = [
+    { t: "满地都是六便士，他却抬头看见了月亮。", f: "毛姆《月亮与六便士》" },
+    { t: "追风赶月莫停留，平芜尽处是春山。", f: "田锡《塞上曲》" },
+    { t: "所有的惊艳，都来自长久的沉淀。", f: "《时间之书》" },
+    { t: "发光并非太阳的专利，你也可以发光。", f: "郭沫若" },
+    { t: "路漫漫其修远兮，吾将上下而求索。", f: "屈原《离骚》" },
+    { t: "且视他人之疑目如盏盏鬼火，大胆去走你的夜路。", f: "史铁生" },
+    { t: "凡是过去，皆为序章。", f: "莎士比亚《暴风雨》" },
+    { t: "我们都在阴沟里，但仍有人仰望星空。", f: "王尔德" },
+    { t: "每一个不曾起舞的日子，都是对生命的辜负。", f: "尼采" },
+    { t: "人生如逆旅，我亦是行人。", f: "苏轼《临江仙·送钱穆父》" },
+    { t: "心之所向，素履以往。", f: "七堇年" },
+    { t: "日拱一卒，功不唐捐。", f: "胡适" },
+    { t: "于无声处积蓄，于明亮时绽放。", f: "梭罗《瓦尔登湖》" },
+    { t: "走过的每一步，都铺成了脚下的路。", f: "路遥《人生》" }
+  ];
+
+  /* Fisher-Yates 洗牌后取前两条，保证不重复 */
+  function pickTwo() {
+    var arr = QUOTES.slice();
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return [arr[0], arr[1]];
+  }
+
+  function fill(el, q) {
+    if (!el || !q) return;
+    var txt = el.querySelector(".quote-text");
+    var from = el.querySelector(".quote-from");
+    if (txt) txt.textContent = q.t;
+    if (from) from.textContent = "——" + q.f;
+    var card = el.closest(".contact-card");
+    var btn = card ? card.querySelector(".contact-copy") : null;
+    if (btn) btn.setAttribute("data-copy-text", q.t + "——" + q.f);
+  }
+
+  function init() {
+    var friend = document.getElementById("quoteFriend");
+    var campaign = document.getElementById("quoteCampaign");
+    if (!friend && !campaign) return;
+    var two = pickTwo();
+    fill(friend, two[0]);
+    fill(campaign, two[1]);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
