@@ -330,6 +330,7 @@ html.dark .btn-primary { color: #0a1424; }
 .hero-greeting { color: var(--muted); font-size: .95rem; letter-spacing: .12em; }
 .hero-greeting .emo { display: inline-block; font-size: 1.15rem; margin-right: 6px; }
 .hero-name {
+  font-family: "Noto Serif SC", "Manrope", "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", serif;
   font-size: clamp(3.2rem, 11vw, 7.5rem);
   font-weight: 800; line-height: 1.1; letter-spacing: .1em;
   background: var(--hero-grad);
