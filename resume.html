@@ -107,7 +107,7 @@
   <!-- 工具条（打印时自动隐藏） -->
   <div class="no-print">
     <div style="max-width:794px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;box-sizing:border-box;">
-      <a class="tool-btn" href="index.html">← 返回网站</a>
+      <a class="tool-btn" href="index.html#skip-intro">← 返回网站</a>
       <span class="cv-note">标准 A4 · 点击右侧按钮打印 / 另存为 PDF</span>
       <button class="tool-btn primary" onclick="window.print()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>
@@ -116,20 +116,20 @@
     </div>
   </div>
 
-  <!-- A4 简历主体（留空框架 + 预置姓名，其余自行填写） -->
+  <!-- A4 简历主体 -->
   <main class="sheet">
 
     <!-- ================= 头部 ================= -->
     <header>
       <h1 class="cv-name">张海宁</h1>
       <p class="cv-en">Hayden Zhang</p>
-      <p class="cv-slogan">做一颗持续发光的小行星</p>
+      <p class="cv-slogan">做一颗持续发光的小行星 · 把复杂留给自己，把清楚交给别人</p>
       <div class="cv-contact">
-        <span><b>电话</b><!-- 待填：手机号 -->____________</span>
+        <span><b>电话</b>________________</span>
         <span><b>邮箱</b>1229916610@qq.com</span>
-        <span><b>微信</b><!-- 待填 -->____________</span>
+        <span><b>微信</b>________________</span>
         <span><b>GitHub</b>github.com/Kenterles</span>
-        <span><b>个人站点</b><!-- 待填 -->你的域名</span>
+        <span><b>YouTube</b>youtube.com/@enterlesK-r3p</span>
       </div>
     </header>
 
@@ -138,11 +138,11 @@
       <h2 class="cv-sec-title">求职意向</h2>
       <div class="cv-item">
         <div class="cv-item-head">
-          <b>目标岗位 · 待填写</b>
-          <i>期望城市 · 待填写</i>
-          <span class="time">可到岗时间 · 待填写</span>
+          <b>前端开发 / AI 应用 · 实习或兼职</b>
+          <i>期望地点：济南（可就近）</i>
+          <span class="time">可投入：学期内课余 + 寒暑假</span>
         </div>
-        <p class="cv-desc">一句话说明你的求职方向与个人优势，例如：希望进入 ____ 行业，从事 ____ 方向的工作，把 ____ 与 ____ 结合起来。</p>
+        <p class="cv-desc">希望把「前端开发」与「AI 工具应用」结合起来，做能被真实使用的小产品；愿意从基础岗位做起，接受长期投入与快速学习。</p>
       </div>
     </section>
 
@@ -156,85 +156,82 @@
           <span class="time">2026.09 – 至今</span>
         </div>
         <ul class="cv-desc">
-          <li>主修课程：待填写（挑 3–5 门与求职方向相关的课程）</li>
-          <li>GPA / 排名：待填写（如有优势可写，如 GPA 3.7/4.0 · 专业前 10%）</li>
-          <li>在校荣誉：待填写（奖学金、荣誉称号等）</li>
+          <li>政治面貌：共青团员</li>
+          <li>专业基础课在读：普通生物学、无机及分析化学、高等数学、大学英语、计算机应用基础</li>
+          <li>学习方向：在生物科学专业课程之外，持续自学前端开发（HTML / CSS / JavaScript）与 AI 工具应用</li>
         </ul>
       </div>
     </section>
 
-    <!-- ================= 实习经历 ================= -->
+    <!-- ================= 项目与实践经历 ================= -->
     <section class="cv-sec">
-      <h2 class="cv-sec-title">实习经历</h2>
+      <h2 class="cv-sec-title">项目与实践经历</h2>
 
       <div class="cv-item">
         <div class="cv-item-head">
-          <b>公司 / 组织名称 · 待填写</b>
-          <i>岗位 · 待填写</i>
-          <span class="time">20XX.06 – 20XX.09</span>
+          <b>个人品牌网站「做一颗持续发光的小行星」</b>
+          <i>独立设计与开发</i>
+          <span class="time">2026.09 – 至今</span>
         </div>
         <ul class="cv-desc">
-          <li>负责内容一：用「动词 + 工作 + 数据结果」结构写，例如：独立完成 ____，效率提升 ____%</li>
-          <li>负责内容二：待填写</li>
-          <li>负责内容三：待填写</li>
+          <li>独立完成从视觉设计到前端实现的全部工作，产出可直接上线的静态个人站点，含首页、成长轨迹、作品展示、荣誉证书、日常相册、联系我六大板块</li>
+          <li>技术实现：HTML5 / CSS3 / 原生 JavaScript 手写实现，自建 Tailwind 本地运行时，零第三方依赖、双击即可运行</li>
+          <li>交互亮点：Canvas 三维标签云、深空星尘背景、流星开屏动画、相册灯箱、滚动淡入等轻量动效</li>
+          <li>使用体验：完整响应式适配（桌面 / 平板 / 移动端），并配套一套 A4 打印版简历页</li>
         </ul>
       </div>
 
       <div class="cv-item">
         <div class="cv-item-head">
-          <b>公司 / 组织名称 · 待填写</b>
-          <i>岗位 · 待填写</i>
-          <span class="time">20XX.12 – 20XX.02</span>
+          <b>院系新生导引季 · 宣传落地页</b>
+          <i>视觉设计 & 前端实现</i>
+          <span class="time">大一在读期间</span>
         </div>
         <ul class="cv-desc">
-          <li>负责内容一：待填写</li>
-          <li>负责内容二：待填写</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ================= 项目经历 ================= -->
-    <section class="cv-sec">
-      <h2 class="cv-sec-title">项目经历</h2>
-
-      <div class="cv-item">
-        <div class="cv-item-head">
-          <b>项目名称 · 待填写</b>
-          <i>角色：负责人 / 核心成员 · 待填写</i>
-          <span class="time">20XX.03 – 20XX.06</span>
-        </div>
-        <ul class="cv-desc">
-          <li>项目简介：待填写（一句话说明项目是什么、解决什么问题）</li>
-          <li>我的贡献：待填写（用了什么技术 / 方法，取得什么数据结果）</li>
-          <li>项目成果：待填写（获奖、上线、用户量、转化等）</li>
+          <li>独立完成宣传落地页的设计与开发，从信息梳理、视觉呈现到页面搭建全流程跟进，帮助新生快速了解校园生活</li>
+          <li>上线前逐项自测不同设备的显示与打开情况，确保页面在真实使用场景下稳定可用</li>
         </ul>
       </div>
 
       <div class="cv-item">
         <div class="cv-item-head">
-          <b>项目名称 · 待填写</b>
-          <i>角色 · 待填写</i>
-          <span class="time">20XX.09 – 20XX.12</span>
+          <b>个人视觉作品集（6 件）</b>
+          <i>独立创作 · AI 与科技 / 创意设计 / 校园活动</i>
+          <span class="time">大一在读期间</span>
         </div>
         <ul class="cv-desc">
-          <li>项目简介：待填写</li>
-          <li>我的贡献：待填写</li>
+          <li>AI 与科技方向：《意识胚》《数元织域》——围绕数字生命与技术意象完成概念视觉创作</li>
+          <li>创意设计方向：《硅宇破晓》《暮域回响》——以未来感色彩与光影构建系列视觉表达</li>
+          <li>校园活动方向：《晴隅风信》《课尽余章》——用摄影与设计记录校园活动与日常片段</li>
         </ul>
       </div>
     </section>
 
     <!-- ================= 校园经历 ================= -->
     <section class="cv-sec">
-      <h2 class="cv-sec-title">校园经历 / 学生工作</h2>
+      <h2 class="cv-sec-title">校园经历</h2>
+
       <div class="cv-item">
         <div class="cv-item-head">
-          <b>组织 / 社团名称 · 待填写</b>
-          <i>职务 · 待填写</i>
-          <span class="time">20XX.09 – 20XX.06</span>
+          <b>班级团支书竞选</b>
+          <i>候选人（在选）</i>
+          <span class="time">大一在读期间</span>
         </div>
         <ul class="cv-desc">
-          <li>工作内容一：待填写（同样尽量带数据，如：组织活动 12 场，覆盖 800+ 人次）</li>
-          <li>工作内容二：待填写</li>
+          <li>以「踏实落地、技术提效、同好联结、轻松共担」四项主张面向班级同学做完整自我陈述与工作规划</li>
+          <li>主张用 AI 工具与办公技巧简化统计、文案类重复工作，为班级事务节省时间、把流程做清楚</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-head">
+          <b>社团与校园活动</b>
+          <i>参与者 · 影像与设计记录</i>
+          <span class="time">大一在读期间</span>
+        </div>
+        <ul class="cv-desc">
+          <li>参与社团团建与校园活动，以摄影和设计的方式记录并呈现活动过程</li>
+          <li>保持羽毛球、魔方等长期爱好，习惯在集体中主动承担沟通与协调的角色</li>
         </ul>
       </div>
     </section>
@@ -243,13 +240,16 @@
     <section class="cv-sec">
       <h2 class="cv-sec-title">技能清单</h2>
       <div class="cv-item">
-        <span class="cv-tag">技能 · 待填</span>
-        <span class="cv-tag">技能 · 待填</span>
-        <span class="cv-tag">技能 · 待填</span>
-        <span class="cv-tag">技能 · 待填</span>
-        <span class="cv-tag">技能 · 待填</span>
-        <span class="cv-tag">技能 · 待填</span>
-        <p class="cv-note" style="margin-top:8px">建议按「工具 / 语言 / 证书」分类填写，例如：Office 三件套、Python、CET-6……</p>
+        <span class="cv-tag">HTML5 / CSS3</span>
+        <span class="cv-tag">原生 JavaScript</span>
+        <span class="cv-tag">Tailwind CSS</span>
+        <span class="cv-tag">响应式布局</span>
+        <span class="cv-tag">Canvas 动画</span>
+        <span class="cv-tag">AI 工具应用</span>
+        <span class="cv-tag">视觉设计与排版</span>
+        <span class="cv-tag">摄影与后期</span>
+        <span class="cv-tag">Office 三件套</span>
+        <span class="cv-tag">活动组织与沟通</span>
       </div>
     </section>
 
@@ -258,10 +258,10 @@
       <h2 class="cv-sec-title">荣誉证书</h2>
       <div class="cv-item">
         <ul class="cv-desc">
-          <li>AI 训练师证书（已取得，可按需改名为证书全称）</li>
-          <li>BSAFE 证书（已取得，可按需改名为证书全称）</li>
-          <li>荣誉 · 待填写</li>
-          <li>荣誉 · 待填写</li>
+          <li>AI 训练师证书（已取得）</li>
+          <li>BSAFE 证书（已取得）</li>
+          <li>院系新生导引季宣传落地页项目 · 主创（独立完成设计与前端实现）</li>
+          <li>个人视觉作品集 6 件，覆盖 AI 与科技 / 创意设计 / 校园活动三个方向</li>
         </ul>
       </div>
     </section>
@@ -270,7 +270,7 @@
     <section class="cv-sec">
       <h2 class="cv-sec-title">自我评价</h2>
       <div class="cv-item">
-        <p class="cv-desc">用 2–3 句第一人称总结自己：性格特质 + 核心能力 + 职业态度。示例：我是一个 ____ 的人，擅长 ____，相信「____」。期待在一个 ____ 的团队里长期成长。</p>
+        <p class="cv-desc">我是张海宁，一个习惯把想法真的做出来的人。性格外向、慢热但真诚，喜欢把复杂的事拆成清楚的步骤一件件推进；遇到问题先自己查、自己试，实在卡住了再找人商量。专业是生物科学，课余时间持续投入前端开发与 AI 应用，相信「把复杂留给自己，把清楚交给别人」。愿意从基础做起，在一个靠谱的团队里长期成长。</p>
       </div>
     </section>
 

@@ -25,6 +25,38 @@
   var finished = false;
   var DUR = { draw: 900, hold: 420, converge: 320, fly: 520 };
 
+  /* ------------------------------------------------------------------
+   * 「开屏动画只播一次」判定
+   * 目标：动画只在真正第一次打开本站时播放；从「打印版简历」返回本站时不重播。
+   *
+   * 说明：站点里简历页已改为「同一标签页」打开，因此 sessionStorage 本身就能
+   * 扛住刷新与来回跳转。下面保留三重判定是为了兜住其他进入方式
+   * （比如曾经用新标签页打开、或日后又改回新窗口打开、或收藏了带 #skip-intro 的链接）。
+   *
+   * 三重判定，任一命中即跳过：
+   *   ① sessionStorage —— 同一标签页会话内已经播放过（覆盖刷新、同标签跳转）
+   *   ② URL 携带 #skip-intro —— 简历页「← 返回网站」链接显式带回的信号
+   *   ③ document.referrer 指向 resume.html —— 站点部署到 http(s) 后的天然兜底
+   * ------------------------------------------------------------------ */
+  var SEEN_KEY = "introPlayed";
+  var SKIP_HASH = "#skip-intro";
+
+  function storeGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function storeSet(k) { try { sessionStorage.setItem(k, "1"); } catch (e) {} }
+
+  function shouldSkip() {
+    if (storeGet(SEEN_KEY) === "1") return true;
+    if (location.hash === SKIP_HASH) return true;
+    try { if (/resume\.html([?#]|$)/.test(document.referrer)) return true; } catch (e) {}
+    return false;
+  }
+
+  /* 跳过播放时顺手把 #skip-intro 从地址栏抹掉，保持 URL 干净 */
+  function cleanHash() {
+    if (location.hash !== SKIP_HASH) return;
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
+
   function rafP(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
@@ -158,6 +190,17 @@
 
   function start() {
     if (!intro || !path) { finish(); return; }
+
+    /* 已经看过开场：不挂 .play（因此不会出现遮罩层），直接收尾放出首屏 */
+    if (shouldSkip()) {
+      window.__introSkipped = true;   /* 供 main.js 复用：非首次访问时不再弹「温馨提示」 */
+      cleanHash();
+      storeSet(SEEN_KEY);   /* 记进本次会话，之后刷新也不再重播 */
+      finish();
+      return;
+    }
+
+    storeSet(SEEN_KEY);     /* 播放前先落标记，避免动画中途刷新又重播 */
 
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("intro-active");

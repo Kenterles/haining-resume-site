@@ -834,22 +834,46 @@
   /* ================================================================
    * 17. 背景音乐（两首随机选一首，进入网站默认开启）
    *     - 受浏览器自动播放策略限制，实际在用户点击「无需关闭」后才开始播放
-   *     - 提示框用于提醒可能处于不宜出声的场合
+   *     - 「✦ 温馨提示」只在首次进入网站时出现一次；从打印版简历返回时不再打扰
+   *     - 导航栏音符图标可随时开关音乐，图标状态跟随「音频是否真的在响」
+   *     - 用户的选择记在 sessionStorage：返回本站时不会把已经关掉的音乐又打开
    * ================================================================ */
   var BGM_FILES = ["背景音乐/Audio-17-34-39.mp3", "背景音乐/Audio-17-34-44.mp3"];
+  var BGM_PREF_KEY = "bgmOn";
+  var BGM_PROMPT_KEY = "bgmPrompted";
   var bgmBtn = $("#bgmToggle");
   var bgmDialog = $("#bgmDialog");
-  var bgmOn = true;              /* 进入网站音乐默认处于开启状态 */
+
+  /* 用户对背景音乐的选择：首次访问默认开启，同一标签页内记住选择
+     （从「打印版简历」返回时页面会重新加载，靠 sessionStorage 才不会又把音乐打开） */
+  function bgmPrefGet() {
+    try { return sessionStorage.getItem(BGM_PREF_KEY) !== "0"; } catch (e) { return true; }
+  }
+  function bgmPrefSet(on) {
+    try { sessionStorage.setItem(BGM_PREF_KEY, on ? "1" : "0"); } catch (e) {}
+  }
+
+  var bgmOn = bgmPrefGet();
   var bgmAudio = new Audio();    /* 单例，随机选曲后设置 src */
   bgmAudio.loop = true;
   bgmAudio.volume = 0.32;
 
+  /* 图标状态一律以「音频是否真的在响」为准：
+     否则浏览器拦截自动播放时会出现“图标显示播放中、其实一点声音都没有”的误导 */
+  function bgmIsPlaying() { return !bgmAudio.paused && !bgmAudio.ended; }
+
   function bgmSyncUI() {
-    if (bgmBtn) {
-      bgmBtn.classList.toggle("on", bgmOn);
-      bgmBtn.setAttribute("aria-label", bgmOn ? "关闭背景音乐" : "开启背景音乐");
-    }
+    if (!bgmBtn) return;
+    var playing = bgmIsPlaying();
+    bgmBtn.classList.toggle("on", playing);
+    bgmBtn.setAttribute("aria-label", playing ? "关闭背景音乐" : "开启背景音乐");
+    bgmBtn.title = playing ? "点击关闭背景音乐" : "点击开启背景音乐";
   }
+  bgmAudio.addEventListener("play", bgmSyncUI);
+  bgmAudio.addEventListener("playing", bgmSyncUI);
+  bgmAudio.addEventListener("pause", bgmSyncUI);
+  bgmAudio.addEventListener("ended", bgmSyncUI);
+
   function bgmPlayRandom() {
     var f = BGM_FILES[Math.floor(Math.random() * BGM_FILES.length)];
     bgmAudio.src = f;
@@ -857,12 +881,15 @@
   }
   function bgmStopMusic() { bgmAudio.pause(); }
 
-  /* 导航栏音乐按钮：随时手动开关 */
+  /* 导航栏音符图标：点一下直接开关背景音乐，关掉时给出明确反馈 */
   if (bgmBtn) bgmBtn.addEventListener("click", function () {
-    bgmOn = !bgmOn;
-    bgmSyncUI();
-    if (bgmOn) { bgmPlayRandom(); toast("正在播放背景音乐 🎵"); }
-    else bgmStopMusic();
+    if (bgmIsPlaying()) {
+      bgmOn = false; bgmPrefSet(false); bgmStopMusic();
+      toast("已关闭背景音乐 🔇");
+    } else {
+      bgmOn = true; bgmPrefSet(true); bgmPlayRandom();
+      toast("正在播放背景音乐 🎵");
+    }
   });
 
   /* 提示框按钮：无需关闭 / 关闭 */
@@ -871,18 +898,33 @@
   var bgmClose = $("#bgmClose");
   if (bgmKeep) bgmKeep.addEventListener("click", function () {
     closeBgmDialog();
-    bgmOn = true; bgmSyncUI(); bgmPlayRandom();
+    bgmOn = true; bgmPrefSet(true); bgmPlayRandom();
   });
   if (bgmClose) bgmClose.addEventListener("click", function () {
     closeBgmDialog();
-    bgmOn = false; bgmSyncUI(); bgmStopMusic();
+    bgmOn = false; bgmPrefSet(false); bgmStopMusic();
   });
 
-  /* 开场动画结束后弹出提示；另有定时兜底，防止 intro 事件未触发 */
+  /* 「✦ 温馨提示」只在【第一次进入网站】时出现一次。
+     判定信号有两个，任一命中都不再弹出：
+       ① window.__introSkipped —— intro.js 判定为非首次访问（从简历页返回）时置为 true
+       ② sessionStorage 里已标记提示过 —— 覆盖同标签页刷新
+     注意：__introSkipped 由 intro.js 在 DOMContentLoaded 后的 rAF 里写入，
+     必须延迟到这里（至少 700ms 后）才读，不能提前读。 */
   var bgmShown = false;
   function showBgmDialog() {
     if (bgmShown || !bgmDialog) return;
     bgmShown = true;
+
+    var alreadyPrompted = false;
+    try { alreadyPrompted = sessionStorage.getItem(BGM_PROMPT_KEY) === "1"; } catch (e) {}
+
+    if (window.__introSkipped || alreadyPrompted) {
+      if (bgmOn) bgmPlayRandom();   /* 按用户上次的选择续播；被拦截就安静地不响 */
+      return;
+    }
+
+    try { sessionStorage.setItem(BGM_PROMPT_KEY, "1"); } catch (e) {}
     bgmDialog.hidden = false;
   }
   window.addEventListener("intro:done", function () { setTimeout(showBgmDialog, 700); });
